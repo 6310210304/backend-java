@@ -5,7 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.catalina.Server;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +29,17 @@ public class EmployeeController {
 
 	
 	@GetMapping("/employee")
-	public List<Employee> getEmployee(){
-		return employeeRepository.findAll();
-	}
+	public ResponseEntity<Object> getEmployee() {
+		
+		try {
+			List<Employee> employees = employeeRepository.findAll();  			
+			return new ResponseEntity<>(employees, HttpStatus.OK);		
+		} catch (Exception e) {
+			return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+	} 
 	
 	@PostMapping("/employee")
 	public Employee addEmployee(@RequestBody Employee body) {
