@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import org.apache.tomcat.util.log.SystemLogHandler;
+//import org.apache.tomcat.util.log.SystemLogHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
